@@ -4,13 +4,16 @@
   "description": "A message app only for members",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "dev": "node --watch src/app.js"
   },
   "author": "dan",
   "license": "ISC",
   "dependencies": {
     "@tailwindcss/cli": "^4.1.10",
     "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
     "tailwindcss": "^4.1.10"
   }
 }
