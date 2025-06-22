@@ -5,7 +5,11 @@ const path = require("path");
 //set up files for views and public
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+//set up req parsing
+app.use(express.urlencoded({ extended: true })); // for form submissions (x-www-form-urlencoded)
+app.use(express.json()); // for JSON requests (like fetch/AJAX)
 
 //routers
 const authRouter = require("./routes/authRouter");
