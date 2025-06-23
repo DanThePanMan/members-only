@@ -6,6 +6,11 @@ exports.registerGet = (req, res) => {
 
 exports.registerPost = (req, res) => {
     const errors = validationResult(req);
+    if (req.password === req.confirmPassword) {
+        return res.render("register", {
+            message: "Passwords must be the same",
+        });
+    }
     if (!errors.isEmpty()) {
         return res.render("register", {
             message: errors
@@ -13,6 +18,7 @@ exports.registerPost = (req, res) => {
                 .map((err) => err.msg)
                 .join(", "),
         });
+        //now for database side actions
     }
 
     const { name, email, password, secret } = req.body;
