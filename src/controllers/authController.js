@@ -1,14 +1,23 @@
 const { validationResult } = require("express-validator");
+const db = require("../models/db");
+const passport = require("passport");
+require("../util/passportUtils")(passport);
 
 exports.registerGet = (req, res) => {
     res.render("register", { message: "" });
 };
 
-exports.registerPost = (req, res) => {
+exports.registerPost = async (req, res) => {
     const errors = validationResult(req);
-    if (req.password === req.confirmPassword) {
+
+    if (req.body.password != req.body.confirmPassword) {
         return res.render("register", {
             message: "Passwords must be the same",
+        });
+    }
+    if (req.body.secret != "garlicSalt") {
+        return res.render("register", {
+            message: "Incorrect secret",
         });
     }
     if (!errors.isEmpty()) {
@@ -18,20 +27,22 @@ exports.registerPost = (req, res) => {
                 .map((err) => err.msg)
                 .join(", "),
         });
-        //now for database side actions
+    } else {
+        await db.createAccount(req);
+        res.redirect("/");
     }
-
-    const { name, email, password, secret } = req.body;
-
-    res.redirect("/");
 };
 
 exports.loginGet = (req, res) => {
     res.render("login", { message: "" });
 };
 
-exports.loginPost = (req, res) => {
+exports.loginPost = (req, res, next) => {
     const errors = validationResult(req);
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/fail",
+    })(req, res, next);
     if (!errors.isEmpty()) {
         return res.render("login", {
             message: errors
@@ -40,9 +51,4 @@ exports.loginPost = (req, res) => {
                 .join(", "),
         });
     }
-
-    const { name, email, password, secret } = req.body;
-    // Proceed with registration logic
-    res.send("login successful");
-    console.log(req.body);
 };
