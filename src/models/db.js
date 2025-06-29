@@ -31,3 +31,14 @@ exports.createAccount = async (req) => {
         console.error(error);
     }
 };
+
+exports.getPosts = async () => {
+    try {
+        const posts = await db.query(
+            "SELECT * FROM post JOIN users ON post.owner_id = users.id"
+        );
+        return posts.rows;
+    } catch (error) {
+        console.error(error);
+    }
+};

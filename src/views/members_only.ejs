@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Members Only</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body
+        class="bg-gradient-to-r from-indigo-100 to-purple-100 flex items-center justify-center min-h-screen"
+    >
+        <div
+            class="bg-white p-10 rounded-2xl shadow-xl text-center max-w-md w-full"
+        >
+            <h1 class="text-4xl font-bold text-indigo-700 mb-4">
+                Members Only
+            </h1>
+            <p class="text-gray-600 mb-8">
+                Access exclusive content by joining us today.
+            </p>
+
+            <div class="space-y-4">
+                <a
+                    href="/auth/register"
+                    class="block w-full bg-indigo-600 text-white py-3 rounded-xl text-lg font-medium hover:bg-indigo-700 transition"
+                    >Make Account</a
+                >
+                <a
+                    href="/auth/login"
+                    class="block w-full bg-white border border-indigo-600 text-indigo-700 py-3 rounded-xl text-lg font-medium hover:bg-indigo-50 transition"
+                    >Login</a
+                >
+                <a
+                    href="/posts"
+                    class="block w-full bg-gray-100 text-gray-700 py-3 rounded-xl text-lg font-medium hover:bg-gray-200 transition"
+                    >View as Guest</a
+                >
+            </div>
+        </div>
+    </body>
+</html>
