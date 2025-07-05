@@ -42,3 +42,17 @@ exports.getPosts = async () => {
         console.error(error);
     }
 };
+
+exports.getUserPosts = async (userID) => {
+    try {
+        const user = await db.query("SELECT * FROM users WHERE id = $1", [
+            userID,
+        ]);
+        const posts = await db.query("SELECT * FROM post WHERE owner_id = $1", [
+            userID,
+        ]);
+        return { posts: posts.rows, user: user.rows[0] };
+    } catch (error) {
+        console.error(error);
+    }
+};

@@ -31,6 +31,8 @@ app.use(passport.session());
 //routers
 const authRouter = require("./routes/authRouter");
 app.use("/auth", authRouter);
+const userRouter = require("./routes/userRouter");
+app.use("/users", userRouter);
 
 app.get("/", (req, res) => {
     if (!req.user) {
