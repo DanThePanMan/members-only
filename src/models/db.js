@@ -56,3 +56,34 @@ exports.getUserPosts = async (userID) => {
         console.error(error);
     }
 };
+
+exports.makePost = async (req) => {
+    const currentDate = new Date();
+
+    try {
+        await db.query(
+            "insert into post (title, content, date_posted, owner_id) values ($1, $2, $3, $4)",
+            [req.body.title, req.body.content, currentDate, req.user.id]
+        );
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+exports.deletePost = async (id, userID) => {
+    const result = await db.query("SELECT owner_id FROM post WHERE id = $1", [
+        id,
+    ]);
+    const postUserID = result.rows[0].owner_id;
+
+    if (postUserID === userID) {
+        try {
+            await db.query("DELETE FROM post WHERE id = $1", [id]).rows;
+        } catch (error) {
+            console.error(error);
+        }
+        return true;
+    } else {
+        return false;
+    }
+};

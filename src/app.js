@@ -15,7 +15,11 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //set up req parsing
+const methodOverride = require("method-override");
+
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+
 app.use(express.json());
 
 //passport middleware
@@ -33,6 +37,8 @@ const authRouter = require("./routes/authRouter");
 app.use("/auth", authRouter);
 const userRouter = require("./routes/userRouter");
 app.use("/users", userRouter);
+const postRouter = require("./routes/postRouter");
+app.use("/post", postRouter);
 
 app.get("/", (req, res) => {
     if (!req.user) {
