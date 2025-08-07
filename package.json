@@ -4,6 +4,7 @@
     "description": "A message app only for members",
     "main": "app.js",
     "scripts": {
+        "ci": "npm install && npm run dev",
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "node --watch src/app.js",
         "tailwind": "npx @tailwindcss/cli -i ./src/public/input.css -o ./src/public/output.css --watch"
