@@ -1,8 +1,7 @@
 secret: garlicSalt
 test account: danchen@gmail.com
 test password: 123123
-demo link: https://members-only-productio.up.railway.app/posts
-
+demo link: members-only-productio.up.railway.app
 # 🛡️ Members Only
 
 A full-stack Node.js web application where users can register, log in, and view or post messages in a members-only area. Admins have the ability to manage content and user permissions.
